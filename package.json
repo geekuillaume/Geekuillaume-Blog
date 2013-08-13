@@ -1,0 +1,14 @@
+{
+  "name": "Geekuillaume-Blog",
+  "description": "A simple Jekyll powered blog",
+  "author": "Guillaume Besson <guillaume@besson.co>",
+  "repository": "https://github.com/geekuillaume/Geekuillaume-Blog",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "~0.5.1",
+    "grunt-contrib-cssmin": "~0.6.1",
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-shell": "~0.3.1"
+  }
+}
