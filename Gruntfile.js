@@ -3,13 +3,13 @@ module.exports = function(grunt) {
     var config = {
         coffee: {
             files: {
-                "js/script.js": ['js/*.coffee']
+                "script.js": ['js/*.coffee']
             }
         },
         cssmin: {
             combine: {
                 files: {
-                    'css/styles.css': ['css/*.css']
+                    'styles.css': ['css/*.css']
                 }
             }
         },
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
                 livereload: true
             },
             all: {
-                files: ["_posts/**/*", "css/*", "js/*"],
+                files: ["index.html", "_posts/**/*", "_layouts/**/*", "css/*", "js/*"],
                 tasks: ["cssmin", "coffee", "shell:jekyll"]
             }
         },

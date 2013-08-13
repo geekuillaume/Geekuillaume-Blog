@@ -1,3 +1,5 @@
-name: Your New Jekyll Site
+name: Guillaume Besson
+subtitle: Thoughts of a passionate developer
 markdown: redcarpet
 pygments: true
+exclude: [css, js, node_modules, Gruntfile.js, README.md, package.json]
