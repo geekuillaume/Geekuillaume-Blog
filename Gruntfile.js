@@ -3,13 +3,13 @@ module.exports = function(grunt) {
     var config = {
         coffee: {
             files: {
-                "script.js": ['js/*.coffee']
+                "tmp/script.js": ['js/*.coffee']
             }
         },
         cssmin: {
             combine: {
                 files: {
-                    'styles.css': ['css/*.css']
+                    'tmp/styles.css': ['css/*.css']
                 }
             }
         },
@@ -21,13 +21,13 @@ module.exports = function(grunt) {
                 command: "jekyll build",
             },
             copyAssets: {
-                command: "cp -f styles.css _site/styles.css; cp -f script.js _site/script.js; cp -rf images _site/"
+                command: "cp -f tmp/styles.css dist/styles.css; cp -f tmp/script.js dist/script.js; cp -rf images dist/"
             },
             copyFinal: {
                 command: "rm -rf dist; mv _site dist/"
             },
             clean: {
-                command: "rm -f styles.css script.js"
+                command: "rm -rf tmp"
             }
         },
         htmlmin: {
@@ -39,9 +39,9 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true, // tell Grunt where to find our images and where to export them to.
-                        cwd: '_site/',
+                        cwd: 'dist/',
                         src: ['**/*.html'],
-                        dest: '_site/',
+                        dest: 'dist/',
                         ext: '.html'
                     }
                 ]
@@ -52,8 +52,8 @@ module.exports = function(grunt) {
                 livereload: true
             },
             jekyll: {
-                files: ["index.html", "_posts/**/*", "_layouts/**/*"],
-                tasks: ["shell:jekyll", 'shell:copyAssets', "htmlmin", "shell:copyFinal"]
+                files: ["index.html", "_posts/**/*", "_layouts/**/*", "_config.yml"],
+                tasks: ["shell:jekyll", "shell:copyFinal", 'shell:copyAssets', "htmlmin"]
             },
             css: {
                 files: ["css/*.css"],
@@ -87,6 +87,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
-    grunt.registerTask('default', ['cssmin', 'coffee', 'shell:jekyll', 'htmlmin', 'shell:copyAssets', 'shell:copyFinal', 'shell:clean']);
-    grunt.registerTask('server', ['cssmin', 'coffee', 'shell:jekyll', 'shell:copyAssets', 'shell:copyFinal', 'connect', 'watch']);
+    grunt.registerTask('default', ['cssmin', 'coffee', 'shell:jekyll', 'shell:copyFinal', 'htmlmin', 'shell:copyAssets', 'shell:clean']);
+    grunt.registerTask('server', ['cssmin', 'coffee', 'shell:jekyll', 'shell:copyFinal', 'htmlmin', 'shell:copyAssets', 'connect', 'watch']);
 }
