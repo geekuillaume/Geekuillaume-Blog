@@ -19,6 +19,13 @@
       <p class="subtitle">{{site.subtitle}}</p>
     </div>
   </header>
+  <div class="row headerPages">
+    {% for page in site.headerPages %}
+      <div class="headerPageContainer large-{{ 12 | divided_by: forloop.length }} columns">
+        <p class="headerPage"><a href="{{page.URL}}">{{page.name}}</a></p>
+      </div>
+    {% endfor %}
+  </div>
   <div class="container row">
     {{content}}
   </div>

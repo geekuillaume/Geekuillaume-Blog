@@ -51,17 +51,66 @@ header {
     vertical-align: middle;
     margin-left: 2em;
 }
+.headerPages {
+    padding: 0 1em;
+}
+.headerPages:hover .headerPageContainer {
+    -webkit-transform: scale(0.9);
+}
+.headerPageContainer {
+    padding: 0 0.1em;
+    -webkit-transform-origin: 50% 100%;
+    transition: 0.5s all ease;
+}
+.headerPageContainer:first-child {
+    -webkit-transform-origin: 0% 100%;
+}
+.headerPageContainer:last-child {
+    -webkit-transform-origin: 100% 100%;
+}
+.headerPageContainer:hover {
+    -webkit-transform: scale(1.1) !important;
+}
+.headerPage {
+    text-align: center;
+    background-color: rgba(255,255,255,.5);
+    margin-bottom: 0;
+}
+.headerPages a {
+    color: #222;
+    display: block;
+    padding: 1em 0;
+}
 .container {
     padding: 5em 0;
     background-color: white;
     box-shadow: 0 0 5px rgba(0,0,0,.5);
     overflow: hidden;
 }
-.content {
+.content, .posts {
     padding: 0 3em;
 }
 .content p {
     text-align: justify;
+    font-size: 1.5em;
+}
+.content a {
+    position: relative;
+}
+.content a:after {
+    content: '';
+    position: absolute;
+    background-color: #2ba6cb;
+    width: 80%;
+    height: 2px;
+    bottom: 0;
+    right: 10%;
+    transition: 0.5s all ease;
+}
+.content a:hover:after {
+    right: 0;
+    width: 100%;
+    background-color: #2795b6;
 }
 h1 {
     text-align: center;
