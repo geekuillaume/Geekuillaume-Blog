@@ -31,6 +31,8 @@ Use with Github
 ---------------
 
 You can use Github to automatically update your site on your server when you push a commit to your repository.
-To do so, change the port in the updater.js to something random and add a WebHook URL in your Github repo to your server IP (with the right port). This will do a request every time you push a commit and update the dist reposotory on your server.
+To do so, change the port in the `updater.js` to something random and add a WebHook URL in your Github repo to your server IP (with the right port). This will do a request every time you push a commit and update the dist repository on your server.
 
-Don't forget to lauch the updater.js file with the command `node updater.js`.
+Don't forget to lauch the `updater.js` file with the command `node updater.js`.
+
+If your blog is behind [Cloudflare CDN](https://www.cloudflare.com/) this script can also purge the website cache once the site rebuilt. To do so, simply add your CloudFlare email, token and domain in the `updater.js` file
