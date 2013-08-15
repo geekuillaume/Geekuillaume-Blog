@@ -2,4 +2,4 @@ name: Guillaume Besson
 subtitle: Thoughts of a passionate developer
 markdown: redcarpet
 pygments: true
-exclude: [css, js, node_modules, Gruntfile.js, README.md, package.json]
+exclude: [css, js, styles.css, script.js, images, node_modules, Gruntfile.js, README.md, package.json]
