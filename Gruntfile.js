@@ -18,10 +18,13 @@ module.exports = function(grunt) {
                 options: {
                     stdout: true
                 },
-                command: "rm -rf _site/; jekyll build",
+                command: "jekyll build",
             },
             copyAssets: {
-                command: "cp -f styles.css _site/styles.css; cp -f script.js _site/script.js; cp -rf images _site/"
+                command: "mv -f styles.css _site/styles.css; mv -f script.js _site/script.js; cp -rf images _site/"
+            },
+            copyFinal: {
+                command: "rm -rf dist; mv _site dist/"
             }
         },
         htmlmin: {
@@ -81,6 +84,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
-    grunt.registerTask('default', ['cssmin', 'coffee', 'shell:jekyll', 'htmlmin', 'shell:copyAssets']);
+    grunt.registerTask('default', ['cssmin', 'coffee', 'shell:jekyll', 'htmlmin', 'shell:copyAssets', 'shell:copyFinal']);
     grunt.registerTask('server', ['cssmin', 'coffee', 'shell:jekyll', 'shell:copyAssets', 'connect', 'watch']);
 }
