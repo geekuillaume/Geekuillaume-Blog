@@ -6,7 +6,7 @@ date:   2013-09-15 16:00:00
 
 Hello everyone !
 
-This is the first post of a -I hope- a long serie of originals and inspirings posts on this blog. More will come about who I am, what I do and how this blog is built.
+This is the first post of -I hope- a long serie of originals and inspirings posts on this blog. More will come about who I am, what I do and how this blog is built.
 
 This blog is hosted on my server but all the source code is hosted on [Github](https://github.com/geekuillaume/Geekuillaume-Blog/). Don't hesitate to see how it work by diging inside the source code.
 
