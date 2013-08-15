@@ -1,12 +1,15 @@
-var exec = require('child_process').exec;
-var http = require('http');
-var https = require('https');
+var exec        = require('child_process').exec;
+var http        = require('http');
+var https       = require('https');
 var querystring = require('querystring');
 
-var PORT = 8042 // Replace with a specific port
-var cloudFlareEmail = "" // Replace with your CloudFlare email
-var cloudFlareToken = "" // Replace with your CloudFlare API token
-var cloudFlareDomain = "" // Replace with the domain of your blog
+var PORT       = 8042 // Replace with a specific port
+var cloudFlare = { // This section is optionnal, if you don't use CloudFlare just ignore it
+    email: "", // Replace with your CloudFlare email
+    token: "", // Replace with your CloudFlare API token
+    domain: "besson.co", // Replace with the domain of your blog
+    files: "http://blog.besson.co/*" // Optionnal, if you want to purge only some file(s)
+}
 
 var regenerateSite = function(callback) {
     gitPull(function() {
@@ -35,16 +38,21 @@ var gruntBuild = function (callback) {
 }
 
 var purgeCloudFlare = function(callback) {
-    if (!cloudFlareEmail || !cloudFlareToken)
+    if (!cloudFlare.email || !cloudFlare.token || !cloudFlare.domain)
         return callback && callback()
     console.log("Purge cache from CloudFlare")
     var post_data = querystring.stringify({
         a: "fpurge_ts",
-        tkn: cloudFlareToken,
-        email: cloudFlareEmail,
-        z: cloudFlareDomain,
+        tkn: cloudFlare.token,
+        email: cloudFlare.email,
+        z: cloudFlare.domain,
         v: "1"
     })
+    if (cloudFlare.files)
+    {
+        post_data.a = "zone_file_purge"
+        post_data.url = cloudFlare.files
+    }
     var req = https.request({
         hostname: "www.cloudflare.com",
         path: "/api_json.html",
