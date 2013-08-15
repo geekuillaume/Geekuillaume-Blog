@@ -3,3 +3,4 @@ subtitle: Thoughts of a passionate developer
 markdown: redcarpet
 pygments: true
 exclude: [css, js, styles.css, script.js, dist, images, node_modules, Gruntfile.js, README.md, package.json, updater.js]
+permalink: "/:categories/:year/:title/"

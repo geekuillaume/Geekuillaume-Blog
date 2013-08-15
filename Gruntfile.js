@@ -21,10 +21,13 @@ module.exports = function(grunt) {
                 command: "jekyll build",
             },
             copyAssets: {
-                command: "mv -f styles.css _site/styles.css; mv -f script.js _site/script.js; cp -rf images _site/"
+                command: "cp -f styles.css _site/styles.css; cp -f script.js _site/script.js; cp -rf images _site/"
             },
             copyFinal: {
                 command: "rm -rf dist; mv _site dist/"
+            },
+            clean: {
+                command: "rm -f styles.css script.js"
             }
         },
         htmlmin: {
@@ -50,7 +53,7 @@ module.exports = function(grunt) {
             },
             jekyll: {
                 files: ["index.html", "_posts/**/*", "_layouts/**/*"],
-                tasks: ["shell:jekyll", 'shell:copyAssets', "htmlmin"]
+                tasks: ["shell:jekyll", 'shell:copyAssets', "htmlmin", "shell:copyFinal"]
             },
             css: {
                 files: ["css/*.css"],
@@ -68,7 +71,7 @@ module.exports = function(grunt) {
         connect: {
             server: {
                 options: {
-                    base: "_site",
+                    base: "dist",
                     hostname: "*"
                 }
             }
@@ -84,6 +87,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-shell');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
-    grunt.registerTask('default', ['cssmin', 'coffee', 'shell:jekyll', 'htmlmin', 'shell:copyAssets', 'shell:copyFinal']);
-    grunt.registerTask('server', ['cssmin', 'coffee', 'shell:jekyll', 'shell:copyAssets', 'connect', 'watch']);
+    grunt.registerTask('default', ['cssmin', 'coffee', 'shell:jekyll', 'htmlmin', 'shell:copyAssets', 'shell:copyFinal', 'shell:clean']);
+    grunt.registerTask('server', ['cssmin', 'coffee', 'shell:jekyll', 'shell:copyAssets', 'shell:copyFinal', 'connect', 'watch']);
 }
